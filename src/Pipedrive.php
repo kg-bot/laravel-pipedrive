@@ -7,6 +7,7 @@ use LasseRafn\Pipedrive\Models\File;
 use LasseRafn\Pipedrive\Models\Organization;
 use LasseRafn\Pipedrive\Models\OrganizationField;
 use LasseRafn\Pipedrive\Models\Person;
+use LasseRafn\Pipedrive\Models\PersonField;
 use LasseRafn\Pipedrive\Models\Pipeline;
 use LasseRafn\Pipedrive\Models\Product;
 use LasseRafn\Pipedrive\Models\Stage;
@@ -44,6 +45,14 @@ class Pipedrive
 	public function persons() {
 		return new Person( $this->request );
 	}
+
+    /**
+     * @return \LasseRafn\Pipedrive\Models\PersonField
+     */
+    public function personfields()
+    {
+        return new PersonField( $this->request );
+    }
 
 	/**
 	 * @return Model|Organization

@@ -21,16 +21,17 @@ class Product extends Model
 	/** @var array */
 	public $prices;
 
-    public function getDeals( $fields = null, $start = 0, $limit = 100 )
+
+    public function deals()
     {
-        $deals = $this->request->get( "{$this->entity}/{$this->id}/deals", null, $fields, $start, $limit );
 
-        if ( !$deals ) {
-            return [];
-        }
+        $productDeal = new ProductDeal( $this->request );
 
-        return array_map( function ( $deal ) {
-            return new Deal( $this->request, $deal );
-        }, $deals );
+        $newEntity = $productDeal->getEntity();
+        $newEntity = str_replace( ':productid', $this->id, $newEntity );
+
+        $productDeal->updateEntity( $newEntity );
+
+        return $productDeal;
     }
 }

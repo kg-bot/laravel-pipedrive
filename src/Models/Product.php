@@ -20,4 +20,17 @@ class Product extends Model
 
 	/** @var array */
 	public $prices;
+
+    public function getDeals( $start = 0, $limit = 100 )
+    {
+        $deals = $this->request->get( "{$this->entity}/{$this->id}/deals", null, null, $start, $limit );
+
+        if ( !$deals ) {
+            return [];
+        }
+
+        return array_map( function ( $deal ) {
+            return new Deal( $this->request, $deal );
+        }, $deals );
+    }
 }

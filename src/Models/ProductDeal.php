@@ -12,4 +12,18 @@ class ProductDeal extends Model
     protected $entity     = 'products/:productid/deals';
     protected $modelClass = self::class;
 
+    /**
+     * @return DealProduct
+     */
+    public function products()
+    {
+        $dealProduct = new DealProduct( $this->request );
+        $newEntity   = $dealProduct->getEntity();
+        $newEntity   = str_replace( ':dealid', $this->id, $newEntity );
+
+        $dealProduct->updateEntity( $newEntity );
+
+        return $dealProduct;
+    }
+
 }

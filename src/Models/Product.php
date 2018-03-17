@@ -21,9 +21,9 @@ class Product extends Model
 	/** @var array */
 	public $prices;
 
-    public function getDeals( $start = 0, $limit = 100 )
+    public function getDeals( $fields = null, $start = 0, $limit = 100 )
     {
-        $deals = $this->request->get( "{$this->entity}/{$this->id}/deals", null, null, $start, $limit );
+        $deals = $this->request->get( "{$this->entity}/{$this->id}/deals", null, $fields, $start, $limit );
 
         if ( !$deals ) {
             return [];

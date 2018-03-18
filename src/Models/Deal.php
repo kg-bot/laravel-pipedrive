@@ -49,11 +49,8 @@ class Deal extends Model
 	{
         if ( \is_array( $org ) ) {
 
-            return ( new Organization( $this->request ) )->find( $org[ 'value' ] );
+            return new Organization( $this->request );
 
-        } elseif ( \is_int( $org ) ) {
-
-            return ( new Organization( $this->request ) )->find( $org );
         }
 
         return $org;
